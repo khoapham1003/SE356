@@ -1,0 +1,89 @@
+﻿@using _1015bookstore.viewmodel.Comon
+@model List<_1015bookstore.viewmodel.Catalog.Categories.CategoryViewModel>
+@{
+    ViewData["Title"] = "ChangeParent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles
+    {
+    <!-- Custom styles for this page -->
+    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+}
+
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+            <h3 class="m-0 font-weight-bold text-primary">@{@ViewBag.Name}</h3>
+            @if (ViewBag.success != null)
+            {
+                <div id="msg" class="card bg-success text-white shadow">
+                    <div class="card-body">
+                        @ViewBag.success
+                    </div>
+                </div>
+            }
+            @if (ViewBag.error != null)
+            {
+                <div id="msg" class="card bg-danger text-white shadow">
+                    <div class="card-body">
+                        @ViewBag.error
+                    </div>
+                </div>
+            }
+            <div>
+                <a asp-action="Index" asp-controller="Category">Xem danh sách</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                Mã sản phẩm
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sCate_name)
+                                </td>
+                                <td>
+                                    <form asp-action="ChangeParent" method="post">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <div class="form-group">
+                                            <input type="hidden" name="id" value=@ViewBag.id />
+                                            <input type="hidden" name="parent_id" value=@item.iCate_id>
+                                            <input type="submit" value="Thêm" class="btn btn-primary" />
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+    {
+    <!-- Page level plugins -->
+    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../js/demo/datatables-demo.js"></script>
+
+}

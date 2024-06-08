@@ -1,0 +1,114 @@
+﻿@using _1015bookstore.viewmodel.Comon
+@model List<_1015bookstore.viewmodel.System.Users.UserViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+    
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-sm-flex align-items-center justify-content-between">
+            <h3 class="m-0 font-weight-bold text-primary">Danh sách người dùng</h3>
+            @if(ViewBag.success != null)
+            {
+                <div id="msg" class="card bg-success text-white shadow">
+                    <div class="card-body">
+                        @ViewBag.success
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                Tài khoản
+                            </th>
+@*                             <th>
+                                Họ
+                            </th>
+                            <th>
+                                Tên
+                            </th>
+                            <th>
+                                Ngày tháng năm sinh
+                            </th>
+                            <th>
+                                Giới tính
+                            </th> *@
+                            <th>
+                                Số điện thoại
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Quyền hạn
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sUser_username)
+                                </td>
+@*                                 <td>
+                                    @Html.DisplayFor(modelItem => item.sUser_firstname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sUser_lastname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.dtUser_dob)
+                                </td>
+                                <td>
+                                    @{
+                                        string genderText = "";
+                                        switch (item.bUser_sex)
+                                        {
+                                            case true:
+                                                genderText = "Nam";
+                                                break;
+                                            case false:
+                                                genderText = "Nữ";
+                                                break;
+                                            default:
+                                                genderText = "Không";
+                                                break;
+                                        }
+
+                                    }
+                                    @genderText
+                                </td> *@
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sUser_phonenumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sUser_email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.sUser_rolename)
+                                </td>
+                                <td>
+
+                                    @Html.ActionLink("Thông tin", "Details", new { user_id = item.gUser_id})
+                                   
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
